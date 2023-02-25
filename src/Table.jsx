@@ -69,7 +69,7 @@ function Table() {
       
     return (
         <div className="container">
-          <button className="btn btn-success mt-2" onClick={() => setShowForm(!showForm)}>Add new item</button>
+          <button className="btn btn-success mt-2" onClick={() => setShowForm(!showForm)}>Add Profile</button>
             {showForm && (
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
@@ -81,7 +81,7 @@ function Table() {
                         <input type="email" className="form-control" name="email" value={formData.email} onChange={handleFormChange} />
                     </div>
                     <div className="form-group">
-                        <label>mobile:</label>
+                        <label>Mobile:</label>
                         <input type="tel" className="form-control" name="mobile" value={formData.mobile} onChange={handleFormChange} />
                     </div>
                     <div className="form-group">
@@ -110,7 +110,7 @@ function Table() {
                             <td>{item.mobile}</td>
                             <td>{item.Bio}</td>
                             <td>
-                                <button className="btn btn-primary mr-2" onClick={() => handleEditClick(item)}>Edit</button>
+                                <button className="btn btn-warning mr-2" onClick={() => handleEditClick(item)}>Edit</button>
                                 <button className="btn btn-danger" onClick={() => handleDeleteClick(item)}>Delete</button>
                             </td>
                         </tr>
