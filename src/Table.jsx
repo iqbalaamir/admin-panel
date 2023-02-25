@@ -14,37 +14,41 @@ function Table() {
     });
 
     useEffect(() => {
-        axios.get("https://63f195065b7cf4107e336af9.mockapi.io/users").then(response => {
-            setData(response.data);
-        });
-    }, []);
+        fetch("https://63f195065b7cf4107e336af9.mockapi.io/users")
+          .then(response => response.json())
+          .then(data => setData(data))
+          .catch(error => console.error(error));
+      }, []);
+      
 
-    const handleSubmit = (event) => {
+      const handleSubmit = (event) => {
         event.preventDefault();
-        if (formData.id) {
-            axios.put(`https://63f195065b7cf4107e336af9.mockapi.io/users/${formData.id}`, formData).then(response => {
-                setData(data.map(item => item.id === formData.id ? formData : item));
-                setFormData({
-                    id: "",
-                    name: "",
-                    email: "",
-                    mobile: "",
-                    Bio: ""
-                });
+        const url = formData.id
+          ? `https://63f195065b7cf4107e336af9.mockapi.io/users/${formData.id}`
+          : "https://63f195065b7cf4107e336af9.mockapi.io/users";
+        const method = formData.id ? "PUT" : "POST";
+        const body = JSON.stringify(formData);
+        const headers = { "Content-Type": "application/json" };
+      
+        fetch(url, { method, body, headers })
+          .then(response => response.json())
+          .then(result => {
+            if (formData.id) {
+              setData(data.map(item => item.id === formData.id ? formData : item));
+            } else {
+              setData([...data, result]);
+            }
+            setFormData({
+              id: "",
+              name: "",
+              email: "",
+              mobile: "",
+              Bio: ""
             });
-        } else {
-            axios.post("https://63f195065b7cf4107e336af9.mockapi.io/users", formData).then(response => {
-                setData([...data, response.data]);
-                setFormData({
-                    id: "",
-                    name: "",
-                    email: "",
-                    mobile: "",
-                    Bio: ""
-                });
-            });
-        }
-    };
+          })
+          .catch(error => console.error(error));
+      };
+      
     const handleFormChange = (event) => {
         setFormData({
             ...formData,
@@ -58,10 +62,11 @@ function Table() {
     };
 
     const handleDeleteClick = (item) => {
-        axios.delete(`https://63f195065b7cf4107e336af9.mockapi.io/users/${item.id}`).then(response => {
-            setData(data.filter(i => i.id !== item.id));
-        });
-    };
+        fetch(`https://63f195065b7cf4107e336af9.mockapi.io/users/${item.id}`, { method: "DELETE" })
+          .then(() => setData(data.filter(i => i.id !== item.id)))
+          .catch(error => console.error(error));
+      };
+      
     return (
         <div className="container">
           <button className="btn btn-success mt-2" onClick={() => setShowForm(!showForm)}>Add new item</button>
