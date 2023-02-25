@@ -1,7 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser,faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 
+library.add(faPencil, faTrash ,faUser);
 function Table() {
     const [data, setData] = useState([]);
     const [showForm, setShowForm] = useState(false);
@@ -69,7 +72,7 @@ function Table() {
       
     return (
         <div className="container">
-          <button className="btn btn-success mt-2" onClick={() => setShowForm(!showForm)}>Add Profile</button>
+          <button className="btn btn-success mt-2" onClick={() => setShowForm(!showForm)}> <FontAwesomeIcon icon='user'/> Add Profile</button>
             {showForm && (
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
@@ -99,7 +102,7 @@ function Table() {
                         <th>Email</th>
                         <th>Mobile</th>
                         <th>Bio</th>
-                        <th>Actions</th>
+                        <th style={{ width: '130px' }}>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -110,8 +113,8 @@ function Table() {
                             <td>{item.mobile}</td>
                             <td>{item.Bio}</td>
                             <td>
-                                <button className="btn btn-warning mr-2" onClick={() => handleEditClick(item)}>Edit</button>
-                                <button className="btn btn-danger" onClick={() => handleDeleteClick(item)}>Delete</button>
+                                <button className="btn btn-warning mr-2" onClick={() => handleEditClick(item)}><FontAwesomeIcon icon="pencil" /></button>
+                                <button className="btn btn-danger" onClick={() => handleDeleteClick(item)}><FontAwesomeIcon icon="trash" /></button>
                             </td>
                         </tr>
                     ))}
