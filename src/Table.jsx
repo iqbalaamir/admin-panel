@@ -97,7 +97,7 @@ function Table() {
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>mobile</th>
+                        <th>Mobile</th>
                         <th>Bio</th>
                         <th>Actions</th>
                     </tr>
