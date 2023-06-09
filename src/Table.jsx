@@ -17,7 +17,7 @@ function Table() {
     });
 
     useEffect(() => {
-        fetch("https://63f195065b7cf4107e336af9.mockapi.io/users")
+        fetch("https://64827d84f2e76ae1b95b4516.mockapi.io/users")
           .then(response => response.json())
           .then(data => setData(data))
           .catch(error => console.error(error));
@@ -27,8 +27,8 @@ function Table() {
       const handleSubmit = (event) => {
         event.preventDefault();
         const url = formData.id
-          ? `https://63f195065b7cf4107e336af9.mockapi.io/users/${formData.id}`
-          : "https://63f195065b7cf4107e336af9.mockapi.io/users";
+          ? `https://64827d84f2e76ae1b95b4516.mockapi.io/users/${formData.id}`
+          : "https://64827d84f2e76ae1b95b4516.mockapi.io/users";
         const method = formData.id ? "PUT" : "POST";
         const body = JSON.stringify(formData);
         const headers = { "Content-Type": "application/json" };
@@ -65,7 +65,7 @@ function Table() {
     };
 
     const handleDeleteClick = (item) => {
-        fetch(`https://63f195065b7cf4107e336af9.mockapi.io/users/${item.id}`, { method: "DELETE" })
+        fetch(`https://64827d84f2e76ae1b95b4516.mockapi.io/users/${item.id}`, { method: "DELETE" })
           .then(() => setData(data.filter(i => i.id !== item.id)))
           .catch(error => console.error(error));
       };
